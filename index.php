@@ -173,17 +173,17 @@ Trade your technical skills for other people's</h1>
                   <div class="form-group">
                     <label>Skill you can offer</label>
                       <input type="text" class="form-control"
-                          id="new_sell_skill" placeholder="Programming"/>
+                          id="new_sell_skill" placeholder="Programming" maxlength="29"/>
                   </div>
                   <div class="form-group">
                     <label>Skill you want to receive</label>
                       <input type="text" class="form-control"
-                          id="new_buy_skill" placeholder="Graphic Design"/>
+                          id="new_buy_skill" placeholder="Graphic Design" maxlength="29"/>
                   </div>
                   <div class="form-group">
                     <label>Listing title</label>
                       <input type="text" class="form-control"
-                          id="new_title" placeholder="Looking for super awesome graphics designer!"/>
+                          id="new_title" placeholder="Looking for super awesome graphics designer!" maxlength="100"/>
                   </div>
                   <div class="form-group">
                     <label>Listing description</label>
