@@ -1,0 +1,98 @@
+
+.well
+{
+    text-align: center;
+    background-image: none !important;
+}
+
+
+#skill-heading, #wants-heading, #skill-content, #wants-content
+{
+    width: 210px !important;
+    overflow: hidden;
+}
+
+#skill-content, #wants-content
+{
+    width: 180px !important;
+}
+
+#skill-content, #wants-content, #title-content
+{
+    overflow: hidden; 
+    text-overflow: ellipsis;
+    white-space: nowrap;
+} 
+
+#view_post .modal-dialog textarea
+{
+    height: 150px !important;
+}
+
+/*
+.old_recaptcha
+{
+    position: absolute;
+    bottom: 0px;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    width: 440px;
+    display: none;
+    z-index: 3000 !important;
+    background: #ffffff;
+}
+
+#recaptcha_response_field
+{
+    z-index: 3000 !important;
+}
+*/
+
+.old_recaptcha
+{
+    display: none;
+}
+
+.recaptchatable
+{
+    width: 100% !important;
+}
+
+
+.row-hover
+{
+    cursor: pointer;
+    background-color: #EEEEFF !important;
+}
+
+.navbar-form .input-group
+{
+    width: 340px !important;
+}
+
+.contact
+{
+    width: 100%;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+#view_description
+{
+    display: inline-block !important;
+    word-wrap: break-word !important;
+    overflow: auto !important;
+    white-space: pre-line !important;
+    height: auto !important;
+    padding-left: 9.5px !important;
+}
+
+
+
+
+
+
+
+
