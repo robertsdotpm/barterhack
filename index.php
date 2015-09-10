@@ -56,7 +56,7 @@ var RecaptchaOptions = { theme : 'clean' };
           <ul class="nav navbar-nav">
             <li class="active"><a href="#">Home</a></li>
             <li><a href="#" data-toggle="modal" data-target="#contact">Contact</a></li>
-            <li><a href="https://github.com/robertsdotpm/barterhack" data-toggle="modal" data-target="#contact">Github</a></li>
+            <li><a href="https://github.com/robertsdotpm/barterhack">Github</a></li>
           </ul>
 
        <div class="col-sm-3 col-md-4 pull-right">
