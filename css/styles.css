@@ -8,7 +8,7 @@
 
 #skill-heading, #wants-heading, #skill-content, #wants-content
 {
-    width: 210px !important;
+    width: 220px !important;
     overflow: hidden;
 }
 
@@ -128,6 +128,18 @@
   width:100%;
   text-align:center;
   color:#fff;
+}
+
+#list_main td
+{
+    padding: 10px !important;
+    font-size: 15px !important;
+}
+
+#list_main th
+{
+    padding-left: 10px !important;
+    padding-right: 10px !important;
 }
 
 
