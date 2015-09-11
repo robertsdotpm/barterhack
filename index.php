@@ -19,7 +19,6 @@ var RecaptchaOptions = { theme : 'clean' };
 
     <script src="js/notify.js"></script>
     <script src="js/ui.js"></script>
-    <script src="js/pagination.js"></script>
 
     <script src='https://www.google.com/recaptcha/api.js'></script>
 
