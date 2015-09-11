@@ -2,18 +2,7 @@
 require_once("recaptchalib.php");
 require_once("config.php");
 require_once("lib.php");
-
-//Connect to DB.
-$con = mysql_connect($config["db"]["host"], $config["db"]["user"], $config["db"]["pass"]);
-if(!$con) {
-    die('Not connected : ' . mysql_error());
-}
-
-//Select DB.
-$db_selected = mysql_select_db($config["db"]["name"], $con);
-if(!$db_selected) {
-    die('Can\'t use foo : ' . mysql_error());
-}
+require_once("globals.php");
 
 //Process API call.
 $call = $_GET["call"];
@@ -74,8 +63,10 @@ switch($call)
 
     case "list":
         //Get listings.
-        $listings_per_page = mysql_real_escape_string($config["listings"]["per_page"]);
+        $per_page_unsafe = $config["listings"]["per_page"];
+        $per_page = mysql_real_escape_string($per_page_unsafe);
         $query = $_GET["q"];
+        $query_unsafe = $_GET["q"];
         if(!empty($query))
         {
             $query = mysql_real_escape_string(strtolower($query));
@@ -86,7 +77,29 @@ switch($call)
             $where = "";
         }
 
-        $sql = "SELECT * FROM `listings` WHERE `visible`=1 $where ORDER BY `timestamp` DESC LIMIT $listings_per_page";
+        //Pagination.
+        $page_no = $_POST["p"];
+        $total_pages = get_page_no($con, $per_page, $query_unsafe);
+        if(empty($page_no))
+        {
+            $page_no = 1;
+        }
+        if(!is_numeric($page_no))
+        {
+            $page_no = 1;
+        }
+        if($page_no > $total_pages)
+        {
+            $page_no = 1;
+        }
+        if($page_no < 1)
+        {
+            $page_no = 1;
+        }
+        $start = ($page_no - 1) * $per_page;
+        $start = mysql_real_escape_string($start);
+
+        $sql = "SELECT * FROM `listings` WHERE `visible`=1 $where ORDER BY `timestamp` DESC LIMIT $start,$per_page";
         $result = mysql_query($sql, $con);
         $rows = array();
         while($row = mysql_fetch_assoc($result)) {

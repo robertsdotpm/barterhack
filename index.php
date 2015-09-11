@@ -19,6 +19,7 @@ var RecaptchaOptions = { theme : 'clean' };
 
     <script src="js/notify.js"></script>
     <script src="js/ui.js"></script>
+    <script src="js/pagination.js"></script>
 
     <script src='https://www.google.com/recaptcha/api.js'></script>
 
@@ -62,7 +63,7 @@ var RecaptchaOptions = { theme : 'clean' };
        <div class="col-sm-3 col-md-4 pull-right">
         <form class="navbar-form" role="search" onsubmit="return search();">
         <div class="input-group">
-            <input type="text" class="form-control" placeholder="Search for skills" name="srch-term" id="srch-term">
+            <input type="text" class="form-control" placeholder="Search for skills" name="srch-term" id="srch-term" value="<?php echo(htmlspecialchars($_GET["q"])); ?>">
             <div class="input-group-btn">
                 <button class="btn btn-default" type="submit" id="do_search"><i class="glyphicon glyphicon-search"></i></button>
             </div>
@@ -258,13 +259,101 @@ Trade your technical skills for other people's</h1>
   <div class="col-md-12">
   <h3>Recent technical skills on offer</h3>
 
- <table class="table table-striped table-condensed table-list"></table>
+ <table class="table table-striped table-condensed table-list" id="list_main"></table>
+
+<!-- Larger pagination -->
+
+<ul class="pagination pull-right">
+<?php
+require("globals.php");
+require("lib.php");
+$total_pages = get_page_no($con, $config["listings"]["per_page"], $_GET["q"]);
+$page_no = $_GET["p"];
+$query = urlencode($_GET["q"]);
+$pagination_links = 5;
+if(!is_numeric($page_no))
+{
+    $page_no = 1;
+}
+else
+{
+    if($page_no > $total_pages)
+    {
+        $page_no = 1;
+    }
+
+    if($page_no < 1)
+    {
+        $page_no = 1;
+    }
+}
+echo '<input id="current_page" type="hidden" value="' . $page_no . '">';
+echo '<ul class="pagination pull-right">';
+if($page_no == 1)
+{
+    echo '<li><a href="#">&laquo;</a></li>';
+}
+else
+{
+    $last_page_no = $page_no - 1;
+    echo '<li><a href="index.php?p=' . $last_page_no . '&q=' . $query . '">&laquo;</a></li>';
+}
+
+$pages_left = ($total_pages - $page_no);
+if($pages_left >= $pagination_links)
+{
+    $pages_left = $pagination_links - 1;
+}
+
+//Previous pages (if any.)
+$previous_pages = ($pagination_links - $pages_left) - 1;
+if($previous_pages)
+{
+    //Underflow.
+    if($page_no - $previous_pages < 1)
+    {
+        $previous_pages = $page_no - 1;
+    }
+
+    for($i = 0; $i < $previous_pages && $previous_pages; $i++)
+    {
+        $no = ($page_no - $previous_pages) + $i;
+        echo '<li><a href="index.php?p=' . $no . '&q=' . $query . '">' . $no . '</a></li>';
+    }
+}
+
+//The current page.
+echo '<li class="active"><a href="#">' . $page_no . '</a></li>';
+
+//Next pages (if any.)
+for($i = 1; $i < $pages_left + 1; $i++)
+{
+    $no = $page_no + $i;
+    echo '<li><a href="index.php?p=' . $no . '&q=' . $query . '">' . $no . '</a></li>';
+}
+
+if($page_no == $total_pages)
+{
+    echo '<li><a href="#">&raquo;</a></li>';
+}
+else
+{
+    $next_page_no = $page_no + 1;
+    echo '<li><a href="index.php?p=' . $next_page_no . '&q=' . $query . '">&raquo;</a></li>';
+}
+
+?>
+
+</ul>
+
+<br clear="all">
+<div class="spacer"></div>
 
 
 </div>
 
 <script>
-list("");
+list("<?php echo(htmlspecialchars($_GET["q"])); ?>");
 
 $("#do_post").click(function(){
     $(this).prop('disabled', true);

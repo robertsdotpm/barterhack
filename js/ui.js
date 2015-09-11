@@ -7,8 +7,10 @@ function recaptcha(specifier)
 
 function search()
 {
-    query = $("#srch-term").val();
-    list(query);
+    query = encodeURI($("#srch-term").val());
+    page_no = encodeURI($("#current_page").val());
+    url = "index.php?p=" + page_no + "&q=" + query;
+    window.location.replace(url);
     return false;
 }
 
@@ -134,11 +136,17 @@ function post()
 function list(q)
 {
     $('body').css('cursor', 'progress');
-    url = "api.php?call=list&q=" + encodeURIComponent(q);
+    page_no = $("#current_page").val();
+    url  = "api.php?call=list&q=" + encodeURIComponent(q);
+    data = {
+        "p": page_no
+    };
+
     $.ajax({
         type: "POST",
         dataType: "json",
         url: url,
+        data: data,
         success: function( data ) {
             if(typeof data["error"] == "undefined") {
                 html = '<tbody>';
@@ -154,6 +162,10 @@ function list(q)
                     html += '<td><div id="title-content"><a href="#">' + data[key]["title"] + '</a></div></td>';
                     html += '</tr>';
                 });
+
+                if(data.length == 0){
+                    html += '<tr><td colspan="3"><center>There are no listings available at this time.</center></td></tr>';
+                }
 
                 html += '</tbody>';
                 $(".table-list").html(html);

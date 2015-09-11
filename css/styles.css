@@ -89,7 +89,24 @@
     padding-left: 9.5px !important;
 }
 
+#list_main
+{
+    margin-bottom: 0px !important;
+    border-bottom: 1px solid #ddd !important;
+    border-left: 1px solid #ddd !important;
+    border-right: 1px solid #ddd !important;
+}
 
+.spacer
+{
+    height: 130px;
+    width: 50px;
+}
+
+.pagination
+{
+    margin-top: 15px !important;
+}
 
 
 
