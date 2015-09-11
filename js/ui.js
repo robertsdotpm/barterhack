@@ -136,6 +136,11 @@ function post()
 function list(q)
 {
     $('body').css('cursor', 'progress');
+    html  = '<div class="loading_listings">';
+    html += 'Loading listings ... please wait';
+    html += '</div>';
+    $("#list_main").html(html);
+
     page_no = $("#current_page").val();
     url  = "api.php?call=list&q=" + encodeURIComponent(q);
     data = {
@@ -168,7 +173,10 @@ function list(q)
                 }
 
                 html += '</tbody>';
-                $(".table-list").html(html);
+                $("#list_main").html(html);
+                if($('.loading_listings').length) {
+                    $(".loading_listings").remove();
+                } 
                 $('.clickable').hover(function() {
                     $(this).addClass('row-hover');
                 }, function() {

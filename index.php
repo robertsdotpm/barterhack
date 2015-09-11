@@ -15,21 +15,14 @@
 var RecaptchaOptions = { theme : 'clean' };
     </script>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-
-    <script src="js/notify.js"></script>
-    <script src="js/ui.js"></script>
-
-    <script src='https://www.google.com/recaptcha/api.js'></script>
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 
+
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
 
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -38,7 +31,12 @@ var RecaptchaOptions = { theme : 'clean' };
     <![endif]-->
   </head>
 
-  <body>
+  <body onload="doneLoading();">
+  <div id="overlay">
+    <div id="progstat"></div>
+  </div>
+
+    <script src="js/loading.js"></script>    
 
     <!-- Static navbar -->
     <nav class="navbar navbar-default navbar-static-top">
@@ -258,7 +256,8 @@ Trade your technical skills for other people's</h1>
   <div class="col-md-12">
   <h3>Recent technical skills on offer</h3>
 
- <table class="table table-striped table-condensed table-list" id="list_main"></table>
+ <table class="table table-striped table-condensed table-list" id="list_main">
+</table>
 
 <!-- Larger pagination -->
 
@@ -351,6 +350,17 @@ else
 
 </div>
 
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+<script src="js/notify.js"></script>
+<script src="js/ui.js"></script>
+
+<script src='https://www.google.com/recaptcha/api.js'></script>
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
 <script>
 list("<?php echo(htmlspecialchars($_GET["q"])); ?>");
 
@@ -373,7 +383,6 @@ $("#close_reply").click(function(){
 $("#close_post").click(function(){
     $(".old_recaptcha").hide();
 });
-
 </script>
 </body>
 </html>
