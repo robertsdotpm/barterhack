@@ -26,7 +26,7 @@ function update_loading(n)
         x = ". . .";
     }
 
-    stat.innerHTML = "A cat is nice too " + x;
+    stat.innerHTML = "Loading " + x;
 }
 
 function loading_updater(n)
