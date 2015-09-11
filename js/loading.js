@@ -1,6 +1,9 @@
+is_loaded = 0;
+
 function id(v){return document.getElementById(v); }
 
 function doneLoading(){
+    is_loaded = 1;
     ovrl = id("overlay");
     ovrl.style.opacity = 0;
     setTimeout(function(){ 
@@ -35,9 +38,12 @@ function loading_updater(n)
     n = n + 1;
 
     update_loading(n);
-    setTimeout(function(){
-        loading_updater(n);
-    }, 500);
+
+    if(!is_loaded){
+        setTimeout(function(){
+            loading_updater(n);
+        }, 500);
+    }
 }
 
 (function(){
