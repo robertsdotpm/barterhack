@@ -38,6 +38,12 @@ switch($call)
         //Get data.
         $listing_id = $_POST["id"];
         $message = $_POST["message"];
+        $email = $_POST["email"];
+        if(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $ret = array("error" => "Invalid email");
+            echo(json_encode($ret));
+            break;
+        }
         $message = preg_replace("/[^A-Za-z0-9 @.\/\:]/", '', $message);
         $listing = get_listing($listing_id);
         if($listing == FALSE)
@@ -57,6 +63,8 @@ switch($call)
             break;
         }
 
+        //Build message:
+        $message = "IMPORTANT: Send your reply directly to $email. Don't reply directly to this email as it goes no where!\r\n\r\n$message";
         mail($listing["email"], "RE: Your Barter Hack listing.", $message, "From: no-reply@barterhack.com\r\n");
         echo("[1]");
         break;

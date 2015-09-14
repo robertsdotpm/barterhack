@@ -231,7 +231,9 @@ Trade your technical skills for other people's</h1>
                 <form role="form">
                   <div class="form-group">
                     <label for="exampleInputPassword1"></label>
-                      <textarea class="form-control" placeholder="That sounds wonderful. Please get in touch at the following email: foo@example.com." id="reply_message" id="reply_message"></textarea>
+                    <input type="text" class="form-control"
+                          id="reply_email" placeholder="Your email address to receive replies on (required.)" maxlength="100"/>
+                      <textarea class="form-control" placeholder="That sounds wonderful. Do you have a link to a portfolio I can view?" id="reply_message" id="reply_message"></textarea>
                   </div>
                 </form>
                 <div class="view_post_recaptcha"></div>

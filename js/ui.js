@@ -21,6 +21,7 @@ function reply()
     data = {
         "id": $("#view_id").val(),
         "message": $("#reply_message").val(),
+        "email": $("#reply_email").val(),
         "recaptcha_challenge_field": $("#recaptcha_challenge_field").val(),
         "recaptcha_response_field": $("#recaptcha_response_field").val()
     };
